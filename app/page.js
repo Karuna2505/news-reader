@@ -1,8 +1,9 @@
 "use client"
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import { auth,db } from "./firebase";
 import { setDoc,deleteDoc,doc, getDoc } from "firebase/firestore";
+import Grid from "./components/grid";
+import List from "./components/list";
 
 
 async function getData() {
@@ -80,121 +81,9 @@ export default function Home() {
           {isGrid ? "List View" : "Grid View"}
         </button>
         {isGrid ? (
-          <div className="flex flex-wrap gap-4 justify-center" role="status">
-            {newsData.map((article,index) => (
-              <div
-                key={article.title}
-                className="h-[20rem] w-[25rem] m-8 border-2 rounded-xl flex flex-col p-6 items-center"
-              >
-                <div className="flex justify-between w-full">
-                  <img
-                    src={article.urlToImage}
-                    alt={article.title}
-                    className="h-28 w-44"
-                  />
-                 <button
-                    className="mb-6 mx-2"
-                    onClick={() => handleLiked(index)}
-                  >
-                    {likedArticles[index] ? (
-                      <img
-                        src="/red heart.png"
-                        alt="liked-icon"
-                        className="h-6 w-6"
-                      />
-                    ) : (
-                      <img
-                        src="/heart.png"
-                        alt="heart-icon"
-                        className="h-6 w-6"
-                      />
-                    )}
-                  </button>
-                </div>
-                <h3 className="font-semibold p-4">{article.title}</h3>
-                <Link
-                  href={{
-                    pathname: "/NewsDetail",
-                    query: {
-                      title: article.title,
-                      img: article.urlToImage,
-                      description: article.description,
-                      content: article.content,
-                      url: article.url,
-                      date: article.publishedAt,
-                    }
-                  }}
-                  rel="noopener noreferrer"
-                  className="text-blue-200 m-2"
-                >
-                  Read More
-                </Link>
-              </div>
-            ))}
-          </div>
+             <Grid newsData={newsData} likedArticles={likedArticles} handleLiked={handleLiked}/>
         ) : (
-          <ul>
-            {newsData.map((article,index) => (
-              <li
-                key={article.title}
-                className="my-8 mx-20 border-2 flex justify-between h-[18rem] w-[80rem] rounded-xl"
-              >
-                <div className="m-11">
-                  <img
-                    src={article.urlToImage}
-                    alt={article.title}
-                    className="h-[12rem] w-[22rem] rounded-xl"
-                  />
-                </div>
-                <div className="h-[12rem] w-[50rem]  my-9 mr-6">
-                  <div className="flex justify-between">
-                    <h2 className="text-xl m-2 font-semibold">
-                      {article.title}
-                    </h2>
-                    <button
-                    className="mb-6 mx-2"
-                    onClick={() => handleLiked(index)}
-                  >
-                    {likedArticles[index] ? (
-                      <img
-                        src="/red heart.png"
-                        alt="liked-icon"
-                        className="h-6 w-6"
-                      />
-                    ) : (
-                      <img
-                        src="/heart.png"
-                        alt="heart-icon"
-                        className="h-6 w-6"
-                      />
-                    )}
-                  </button>
-                  </div>
-                  <p className="m-2 ">{article.description}</p>
-                  <p className="m-2 whitespace-nowrap overflow-hidden text-ellipsis">
-                    {article.content}
-                  </p>
-                  <Link
-                    href={{
-                      pathname: "/NewsDetail",
-                      query: {
-                        title: article.title,
-                        img: article.urlToImage,
-                        description: article.description,
-                        content: article.content,
-                        url: article.url,
-                        date: article.publishedAt,
-                      },
-                    }}
-                    rel="noopener noreferrer"
-                    className="text-blue-200 m-2"
-                  >
-                    Read more
-                  </Link>
-                </div>
-              </li>
-            ))}
-          </ul>
+             <List newsData={newsData} likedArticles={likedArticles} handleLiked={handleLiked}/>
         )}
       </div>
     </main>
