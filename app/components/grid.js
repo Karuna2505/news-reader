@@ -11,13 +11,13 @@ function grid({newsData,likedArticles,handleLiked}) {
               >
                 <div className="flex justify-between w-full">
                   <img
-                    src={article.urlToImage}
+                    src={article.image_url}
                     alt={article.title}
                     className="h-28 w-44"
                   />
                  <button
                     className="mb-6 mx-2"
-                    onClick={() => handleLiked(index)}
+                    onClick={() => handleLiked(article.title,index)}
                   >
                     {likedArticles[index] ? (
                       <img
@@ -40,11 +40,11 @@ function grid({newsData,likedArticles,handleLiked}) {
                     pathname: "/NewsDetail",
                     query: {
                       title: article.title,
-                      img: article.urlToImage,
+                      img: article.image_url,
                       description: article.description,
                       content: article.content,
-                      url: article.url,
-                      date: article.publishedAt,
+                      url: article.link,
+                      date: article.pubDate,
                     }
                   }}
                   rel="noopener noreferrer"

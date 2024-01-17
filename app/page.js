@@ -7,9 +7,11 @@ import List from "./components/list";
 
 
 async function getData() {
-  const apiKey = "acda265f2a3046aca1e4b35aa2eacf2a";
+  // const apiKey = "acda265f2a3046aca1e4b35aa2eacf2a"; //newapi.org
+  // const apiKey = "pub_36563d277fc44137b7d3d550f5dc2cbbd712b";    //newsdata.io
   const res = await fetch(
-    `https://newsapi.org/v2/top-headlines?country=in&apiKey=${apiKey}&pageSize=40`
+    // `https://newsapi.org/v2/top-headlines?country=in&apiKey=${apiKey}&pageSize=40`
+    `https://newsdata.io/api/1/news?apikey=pub_36563d277fc44137b7d3d550f5dc2cbbd712b&country=in`
   );
 
   if (!res.ok) {
@@ -29,7 +31,8 @@ export default function Home() {
     const fetchData = async () => {
       try {
         const data = await getData();
-        setNewsData(data.articles);
+        console.log(data);
+        setNewsData(data.results);
         setLikedArticles(new Array(data.articles.length).fill(false));
       } catch (error) {
         console.error("Error fetching data:", error.message);
@@ -43,7 +46,7 @@ export default function Home() {
     setGrid(!isGrid);
   }
 
-  async function handleLiked(index) {
+  async function handleLiked(title,index) {
     try {
       const user = auth.currentUser;
       if (!user) {
@@ -52,8 +55,7 @@ export default function Home() {
       }
       const userEmail=user.email;
       const article=newsData[index];
-    const articleId = index.toString();
-    const articleRef = doc(db, userEmail,articleId);
+    const articleRef = doc(db, userEmail,title);
 
     const articleDoc = await getDoc(articleRef);
 

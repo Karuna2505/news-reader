@@ -11,7 +11,7 @@ function list({newsData,likedArticles,handleLiked}) {
               >
                 <div className="m-11">
                   <img
-                    src={article.urlToImage}
+                    src={article.image_url}
                     alt={article.title}
                     className="h-[12rem] w-[22rem] rounded-xl"
                   />
@@ -23,7 +23,7 @@ function list({newsData,likedArticles,handleLiked}) {
                     </h2>
                     <button
                     className="mb-6 mx-2"
-                    onClick={() => handleLiked(index)}
+                    onClick={() => handleLiked(article.title,index)}
                   >
                     {likedArticles[index] ? (
                       <img
@@ -49,11 +49,11 @@ function list({newsData,likedArticles,handleLiked}) {
                       pathname: "/NewsDetail",
                       query: {
                         title: article.title,
-                        img: article.urlToImage,
+                        img: article.image_url,
                         description: article.description,
                         content: article.content,
-                        url: article.url,
-                        date: article.publishedAt,
+                        url: article.link,
+                        date: article.pubDate,
                       },
                     }}
                     rel="noopener noreferrer"
