@@ -4,6 +4,7 @@ import { auth,db } from "./firebase";
 import { setDoc,deleteDoc,doc, getDoc } from "firebase/firestore";
 import Grid from "./components/grid";
 import List from "./components/list";
+import Navbar from "./components/navbar";
 
 
 async function getData() {
@@ -26,7 +27,6 @@ export default function Home() {
   const [isGrid, setGrid] = useState(false);
   const [likedArticles, setLikedArticles] = useState(Array(newsData.length).fill(false));
  
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -77,8 +77,9 @@ export default function Home() {
 
   return (
     <main>
-      <div className="flex flex-col justify-center items-center flex-wrap m-8">
-        <button onClick={handleView} className="border rounded-xl p-2">
+      <div className="flex flex-col items-center">
+      <Navbar />
+        <button onClick={handleView} className="border rounded-xl p-2 mt-28">
           {isGrid ? "List View" : "Grid View"}
         </button>
         {isGrid ? (

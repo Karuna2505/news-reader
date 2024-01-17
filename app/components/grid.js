@@ -3,17 +3,22 @@ import Link from 'next/link'
 
 function grid({newsData,likedArticles,handleLiked}) {
   return (
-    <div className="flex flex-wrap gap-4 justify-center" role="status">
+    <div className="flex flex-wrap gap-4 justify-center w-full">
        {newsData.map((article,index) => (
+         article.description&&article.image_url &&
+              <Link  href={{
+    pathname: '/NewsDetail',
+    query: {...article},
+  }}
+  key={article.title}>
               <div
-                key={article.title}
-                className="h-[20vw] w-[25vw] m-8 border-2 rounded-xl flex flex-col p-6 items-center"
+                className="h-[20rem] w-[25rem] m-4 border-2 rounded-xl flex flex-col p-6 items-center shadow-md shadow-white"
               >
                 <div className="flex justify-between w-full">
                   <img
                     src={article.image_url}
                     alt={article.title}
-                    className="h-[8vw] w-[15vw]"
+                    className="h-28 w-44"
                   />
                  <button
                     className="mb-6 mx-2"
@@ -35,24 +40,9 @@ function grid({newsData,likedArticles,handleLiked}) {
                   </button>
                 </div>
                 <h3 className="font-semibold p-4">{article.title}</h3>
-                <Link
-                  href={{
-                    pathname: "/NewsDetail",
-                    query: {
-                      title: article.title,
-                      img: article.image_url,
-                      description: article.description,
-                      content: article.content,
-                      url: article.link,
-                      date: article.pubDate,
-                    }
-                  }}
-                  rel="noopener noreferrer"
-                  className="text-blue-200 m-2"
-                >
-                  Read More
-                </Link>
+                <h6 className='overflow-hidden'>{article.description}</h6>
               </div>
+              </Link>
             ))}
     </div>
   )
