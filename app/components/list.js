@@ -25,9 +25,31 @@ function list({ newsData, likedArticles, handleLiked }) {
                     />
                   </div>
                   <div className="p-8">
+                  <div className="flex justify-between">
                     <div className="block mt-1 text-lg leading-tight font-medium">
                       {article.title}
                     </div>
+                    <div>
+                    <button
+                    className="mb-6 mx-2"
+                    onClick={() => handleLiked(article.title,index)}
+                  >
+                    {likedArticles[index] ? (
+                      <img
+                        src="/red heart.png"
+                        alt="liked-icon"
+                        className="h-6 w-6"
+                      />
+                    ) : (
+                      <img
+                        src="/heart.png"
+                        alt="heart-icon"
+                        className="h-6 w-6"
+                      />
+                    )}
+                  </button>
+                  </div>
+                  </div>
                     <p className="mt-2">{article.description}</p>
                   </div>
                 </div>
