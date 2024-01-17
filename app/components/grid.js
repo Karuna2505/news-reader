@@ -7,13 +7,13 @@ function grid({newsData,likedArticles,handleLiked}) {
        {newsData.map((article,index) => (
               <div
                 key={article.title}
-                className="h-[20rem] w-[25rem] m-8 border-2 rounded-xl flex flex-col p-6 items-center"
+                className="h-[20vw] w-[25vw] m-8 border-2 rounded-xl flex flex-col p-6 items-center"
               >
                 <div className="flex justify-between w-full">
                   <img
                     src={article.image_url}
                     alt={article.title}
-                    className="h-28 w-44"
+                    className="h-[8vw] w-[15vw]"
                   />
                  <button
                     className="mb-6 mx-2"

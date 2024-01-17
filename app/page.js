@@ -31,7 +31,6 @@ export default function Home() {
     const fetchData = async () => {
       try {
         const data = await getData();
-        console.log(data);
         setNewsData(data.results);
         setLikedArticles(new Array(data.articles.length).fill(false));
       } catch (error) {
