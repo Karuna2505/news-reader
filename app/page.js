@@ -11,7 +11,7 @@ async function getData() {
   // const apiKey = "pub_36563d277fc44137b7d3d550f5dc2cbbd712b";    //newsdata.io
   const res = await fetch(
     // `https://newsapi.org/v2/top-headlines?country=in&apiKey=${apiKey}&pageSize=40`
-    `https://newsdata.io/api/1/news?apikey=pub_36563d277fc44137b7d3d550f5dc2cbbd712b&country=in`
+    `https://newsdata.io/api/1/news?apikey=pub_36563d277fc44137b7d3d550f5dc2cbbd712b&country=in&language=en`
   );
 
   if (!res.ok) {
