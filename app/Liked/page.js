@@ -20,7 +20,7 @@ function page() {
     return () => unsub(); 
   }, []);
  
-  async function handleDelete(articleId) {
+  async function handledelete(articleId) {
     try {
       await deleteDoc(doc(db, userEmail, articleId));
     } catch (error) {
@@ -30,51 +30,49 @@ function page() {
   return (
     <div className='flex flex-col items-center'>
     <Navbar />
-    <div className="flex flex-col justify-center items-center flex-wrap m-8 !mt-12">
-    <ul>
+    <div className="flex flex-col items-center m-8 !mt-16 w-full">
             {newsData.map((article) => (
-              <li
+              <div
                 key={article.title}
-                className="my-8 mx-20 border-2 flex justify-between h-[18rem] w-[80rem] rounded-xl"
+                className="max-w-max mx-12 my-6 rounded-2xl shadow-md shadow-white overflow-hidden md:max-w-6xl border-white border-2"
               >
-                <div className="m-11">
+              <div className='md:flex'>
+                <div className="m-11 md:shrink-0">
                   <img
                     src={article.urlToImage}
                     alt={article.title}
-                    className="h-[12rem] w-[22rem] rounded-xl"
+                    className="h-56 w-full object-cover md:h-full md:w-64"
                   />
                 </div>
-                <div className="h-[12rem] w-[50rem]  my-9 mr-6">
+                <div className="p-8 flex flex-col">
                   <div className="flex justify-between">
-                    <h2 className="text-xl m-2 font-semibold">
+                    <div className="block mt-1 text-lg leading-tight font-medium">
                       {article.title}
-                    </h2>
-                    <button onClick={() => handleDelete(article.title)}>
-                    <img src='/delete (1).png' alt="delete-icon" className='h-8 w-8'/>
-                    </button>
-                  </div>
-                  <p className="m-2 ">{article.description}</p>
-                  <p className="m-2 whitespace-nowrap overflow-hidden text-ellipsis">
-                    {article.content}
-                  </p>
-                  <Link
-                    href={{
-                      pathname: "/NewsDetail",
-                      query: {
-                       ...article
-                      },
-                    }}
-                    rel="noopener noreferrer"
-                    className="text-blue-200 m-2"
+                    </div>
+                    <button
+                    className="mb-6 mx-2 h-6 w-6 shrink"
+                    onClick={() => handledelete(article.title)}
                   >
-                    Read more
-                  </Link>
+                   <img src='/delete (1).png' alt="delete-icon" className='h-8 w-8'/>
+                  </button>
+                  </div>
+                    <p className="mt-2">{article.description}</p>
+                    <div className="py-6 text-blue-200">
+                  <Link
+              href={{
+                pathname: "/NewsDetail",
+                query: { ...article },
+              }}
+              key={article.title}
+            >Read More</Link>
+                  </div>
                 </div>
-              </li>
+              </div>
+              </div>
             ))}
-          </ul>
           </div>
           </div>
+      
   )
 }
 

@@ -32,7 +32,6 @@ export default function Home() {
       try {
         const data = await getData();
         setNewsData(data.results);
-        setLikedArticles(new Array(data.articles.length).fill(false));
       } catch (error) {
         console.error("Error fetching data:", error.message);
       }
@@ -40,6 +39,11 @@ export default function Home() {
 
     fetchData();
   }, []); 
+
+  
+useEffect(() => {
+  setLikedArticles(Array(newsData.length).fill(false));
+}, [newsData]);
 
   function handleView() {
     setGrid(!isGrid);
