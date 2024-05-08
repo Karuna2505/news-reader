@@ -1,31 +1,13 @@
 "use client"
 import React,{useEffect, useState} from 'react'
-import { collection, onSnapshot ,deleteDoc,doc } from "firebase/firestore";
-import { db } from '../firebase';
 import Link from 'next/link';
-import { auth } from '../firebase';
 import Navbar from "../components/navbar";
 
 function page() {
   const [newsData,setNewsData]=useState([]);
-  if(!auth.currentUser){
-    return console.log("Login first");
-  }
-  const userEmail=auth.currentUser.email;
-  const ref = collection(db, userEmail);  
-  useEffect(() => {
-    const unsub = onSnapshot(ref, (snapshot) => {
-      setNewsData(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
-    });
-    return () => unsub(); 
-  }, []);
  
   async function handledelete(articleId) {
-    try {
-      await deleteDoc(doc(db, userEmail, articleId));
-    } catch (error) {
-      console.error('Error deleting article:', error);
-    }
+   
   }
   return (
     <div className='flex flex-col items-center'>

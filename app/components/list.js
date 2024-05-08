@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-function list({ newsData, likedArticles, handleLiked }) {
+function list({ newsData, likedArticles}) {
   return (
     <div className="w-full flex flex-col items-center">
       {newsData.map(
@@ -24,7 +24,6 @@ function list({ newsData, likedArticles, handleLiked }) {
                     </div>
                     <button
                       className="h-6 w-fit contents"
-                      onClick={() => handleLiked(article.title, index)}
                     >
                       {likedArticles[index] ? (
                         <img

@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 
-function grid({newsData,likedArticles,handleLiked}) {
+function grid({newsData,likedArticles}) {
   return (
     <div className="flex flex-wrap gap-4 justify-center w-full">
        {newsData.map((article,index) => (
@@ -22,7 +22,6 @@ function grid({newsData,likedArticles,handleLiked}) {
                   />
                  <button
                     className="mb-6 mx-2"
-                    onClick={() => handleLiked(article.title,index)}
                   >
                     {likedArticles[index] ? (
                       <img
