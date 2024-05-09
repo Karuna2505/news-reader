@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 function navbar() {
-  const [loading, setLoading] = useState(true);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const handleSignIn = async () => {
@@ -40,9 +39,7 @@ function navbar() {
           </li>
        
       </ul>
-      {loading ? (
-  <div className="p-2"></div>
-) : isMobile ? (
+    { isMobile ? (
   <div className="relative">
     <img
       src="/menu.png"
@@ -51,18 +48,14 @@ function navbar() {
       onClick={toggleDropdown}
     />
     <div
-      className={`border absolute left-0 mt-2 ${
+      className={`fixed right-2 mt-3 ${
         isDropdownOpen ? "block" : "hidden"
       }`}
     >
-      <ul className="flex flex-col p-2 mt-2 rounded absolute">
-        <li className="cursor-pointer" onClick={handleSignIn}>
-          Login
-        </li>
-        <li className="cursor-pointer" onClick={handleSignIn}>
-          Signup
-        </li>
-      </ul>
+      <div className="">
+        <div>Login</div>
+        <div>SignUp</div>
+      </div>
     </div>
   </div>
 ) : (
@@ -70,7 +63,7 @@ function navbar() {
     <li className="p-2 cursor-pointer" onClick={handleSignIn}>
       Login
     </li>
-    <li className="p-2 cursor-pointer" onClick={handleSignIn}>
+    <li className="p-2 cursor-pointer" onClick={handleSignOut}>
       Signup
     </li>
   </ul>

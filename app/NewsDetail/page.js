@@ -1,7 +1,6 @@
 'use client'
 import Navbar from "../components/navbar";
 function NewsDetail({searchParams} ) {
-
   return (
     <>
     <Navbar />

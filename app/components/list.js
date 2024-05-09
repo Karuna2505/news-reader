@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-function list({ newsData, likedArticles}) {
+function list({ newsData, likedArticles }) {
   return (
     <div className="w-full flex flex-col items-center">
       {newsData.map(
@@ -40,11 +40,11 @@ function list({ newsData, likedArticles}) {
                       )}
                     </button>
                   </div>
-                  <p className="mt-2">{article.description}</p>
+                  <p className="mt-2 overflow-hidden text-ellipsis">{article.description}</p>
                   <div className="py-6 text-blue-200">
                     <Link
                       href={{
-                        pathname: "/NewsDetail",
+                        pathname: "./NewsDetail",
                         query: { ...article },
                       }}
                       key={article.title}
